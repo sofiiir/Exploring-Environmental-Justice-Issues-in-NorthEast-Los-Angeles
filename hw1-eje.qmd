@@ -21,23 +21,18 @@ ejscreen <- janitor::clean_names(ejscreen)
 ```
 I'm interested in looking at cancer rates and how they correlate to the percentage of low income individauls. 
 
-Filtering for Los Angeles County 
+
+Filtering for Juneau County 
 ```{r}
-los_angeles <- ejscreen |> 
-  filter(cnty_name == "Los Angeles County")
-```
-Testing how the different ids are mapped out
-```{r}
-los_angeles_id <- los_angeles |> 
-  filter(between(id, "060371192013", "060371204001"))
+gwinnet <- ejscreen |> 
+  filter(cnty_name == "Gwinnett County")
 ```
 
-Filtering to see what regions are associated 
-Mapping 
 ```{r}
-tm_shape(los_angeles_id)+
-  tm_polygons(fill = "cancer",
-              fill.scale = tm_scale(values = "brewer.YlOrBr")) 
+tm_shape(gwinnet)+
+  tm_polygons(fill = "peopcolor",
+              fill.scale = tm_scale(values = "brewer.YlOrBr")) +
+  
   
 ```
 
