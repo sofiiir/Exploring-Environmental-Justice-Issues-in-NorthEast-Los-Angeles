@@ -26,10 +26,19 @@ Filtering for Los Angeles County
 los_angeles <- ejscreen |> 
   filter(cnty_name == "Los Angeles County")
 ```
+Testing how the different ids are mapped out
+```{r}
+los_angeles_id <- los_angeles |> 
+  filter(between(id, "060371192013", "060371204001"))
+```
+
+Filtering to see what regions are associated 
 Mapping 
 ```{r}
-tm_shape(los_angeles)+
-  tm_polygons()
+tm_shape(los_angeles_id)+
+  tm_polygons(fill = "cancer",
+              fill.scale = tm_scale(values = "brewer.YlOrBr")) 
+  
 ```
 
 
