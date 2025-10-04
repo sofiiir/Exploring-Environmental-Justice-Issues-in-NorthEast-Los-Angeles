@@ -9,33 +9,54 @@ library(sf)
 library(here)
 library(tmap)
 ```
-Reading in the data
+Reading in the data:
 ```{r}
-# read in geodatabase of EJScreen data at the Census Block Group level
-# also doesn't work with read_sf
+# Read in geodatabase of EJScreen data at the Census Block Group level
 ejscreen <- sf::st_read(here::here("data", "ejscreen","EJSCREEN_2023_BG_StatePct_with_AS_CNMI_GU_VI.gdb")) 
+ 
+# Read in Los Angeles zip code data
+la_zip <- sf::st_read(here::here("Zip_Codes_(LA_County)", "Zip_Codes_(LA_County).shp"))
 ```
 Changing column names to lower_snake
 ```{r}
 ejscreen <- janitor::clean_names(ejscreen)
+
+la_zip <- janitor::clean_names(la_zip)
 ```
-I'm interested in looking at cancer rates and how they correlate to the percentage of low income individauls. 
+I'm interested in looking at cancer rates and how they correlate to the percentage of low income individuals in NorthEast Los Angeles. To concentrate the map shape on the desired location, I downloaded a LA County zip code shape file. Link https://geohub.lacity.org/datasets/lahub::zip-codes-la-county/about 
 
 
-Filtering for Juneau County 
+Filtering for Los Angeles County 
 ```{r}
-gwinnet <- ejscreen |> 
-  filter(cnty_name == "Gwinnett County")
+los_angeles <- ejscreen |> 
+  filter(cnty_name == "Los Angeles County")
 ```
 
+Filtering for Eagle Rock and Highland Park
 ```{r}
-tm_shape(gwinnet)+
-  tm_polygons(fill = "peopcolor",
-              fill.scale = tm_scale(values = "brewer.YlOrBr")) +
+la_zip <- la_zip |> 
+  filter(zip == 90041 | zip == 90042 | zip == 90065 | zip == 90026)
+  
+```
+
+
+```{r}
+tm_shape(la_zip)+
+  tm_polygons() +
+tm_shape(los_angeles)+
+  tm_polygons(fill = "lifeexppct",
+              fill.scale = tm_scale(values = "brewer.YlOrBr")) 
   
   
 ```
 
+```{r}
+tm_shape(la_zip)+
+  tm_polygons() +
+tm_shape(los_angeles)+
+  tm_polygons(fill = "ozone",
+              fill.scale = tm_scale(values = "brewer.YlOrBr")) 
+```
 
 ```{r}
 # filter to a state you are interested in
