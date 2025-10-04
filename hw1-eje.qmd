@@ -40,7 +40,7 @@ los_angeles <- ejscreen |>
   filter(cnty_name == "Los Angeles County")
 ```
 
-###### Filtering for Eagle Rock, Highland Park, Mount Washington, and Glasell Park 
+###### Filtering for NELA neighborhoods
 ```{r}
 la_neighborhood <- la_neighborhood |> 
   filter(name == "Eagle Rock" | name == "Highland Park" | name == "Mount Washington" | name == "Glassell Park" | name == "Cypress Park"| name == "Montecito Heights"| name == "Atwater Village"| name == "Lincoln Heights"| name == "El Sereno"  )
@@ -48,7 +48,6 @@ la_neighborhood <- la_neighborhood |>
 
 
 ## Map of People of Color Percentage for NorthEast Los Angeles 
-### Eagle Rock, Highland Park, Mount Washington, and Glassell Park
 ```{r}
 tm_shape(los_angeles)+
   tm_polygons(fill = "peopcolorpct",
@@ -67,7 +66,6 @@ tm_shape(la_neighborhood, is.main = TRUE) +
                bg.col = "white")
 ```
 ## Map of Air toxics cancer risk, an Environmental Justice (EJ) Index for NorthEast Los Angeles 
-### Eagle Rock, Highland Park, Mount Washington, and Glassell Park
 ```{r}
 tm_shape(los_angeles)+
   tm_polygons(fill = "d2_cancer",
