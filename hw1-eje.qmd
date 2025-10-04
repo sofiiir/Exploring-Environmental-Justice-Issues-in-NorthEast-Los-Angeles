@@ -1,84 +1,90 @@
 ---
-title: "Environmental Justice Data"
+title: "Environmental Justice Data Exploration"
+author: "Sofia Rodas"
+date: October 6, 2025
 format: html
 ---
-Adding the necessary libraries:
+
+## Introduction
+This quarto document explores environmental justice issues in NorthEast Los Angeles (NELA), specifically Eagle Rock, Highland Park, Glassell Park, Cypress Park, Atwater Village, Montecito Heights, Lincoln Heights, El Sereno, and Mount Washington. There is some dispute about the official Los Anegeles neighborhoods that make up NELA so Matsuoka & Urquiza's NELA definition was utilized for this analysis. NELA is ethnically diverse making it an interesting sector to analyze. 
+
+Matsuoka, Martha & Urquiza, John. (2021). Building community knowledge, resilience and resistance through research. GeoJournal. 87. 10.1007/s10708-021-10422-5. 
+
+##### Adding the necessary libraries:
 ```{r}
 library(tidyverse)
 library(sf)
 library(here)
 library(tmap)
 ```
-Reading in the data:
+##### Reading in the data:
 ```{r}
 # Read in geodatabase of EJScreen data at the Census Block Group level
 ejscreen <- sf::st_read(here::here("data", "ejscreen","EJSCREEN_2023_BG_StatePct_with_AS_CNMI_GU_VI.gdb")) 
  
-# Read in Los Angeles zip code data
-la_zip <- sf::st_read(here::here("Zip_Codes_(LA_County)", "Zip_Codes_(LA_County).shp"))
-
 # Read in Los Angeles neighnorhood shape file
 la_neighborhood <- sf::st_read(here::here("LA_Times_Neighborhood_Boundaries-shp", "8494cd42-db48-4af1-a215-a2c8f61e96a22020328-1-621do0.x5yiu.shp"))
 ```
-Changing column names to lower_snake
+###### Changing column names to lower_snake
 ```{r}
 ejscreen <- janitor::clean_names(ejscreen)
-
-la_zip <- janitor::clean_names(la_zip)
 ```
-I'm interested in looking at cancer rates and how they correlate to the percentage of low income individuals in NorthEast Los Angeles. To concentrate the map shape on the desired location, I downloaded a LA County zip code shape file. Link https://geohub.lacity.org/datasets/lahub::zip-codes-la-county/about 
+I'm interested in looking at cancer rates and how they correlate to the percentage of low income individuals in NorthEast Los Angeles. 
 
-I uploaded Los Angeles neighborhoods from 
+I used a Los Angeles neighborhoods shape file to select for the region that from 
 https://geohub.lacity.org/datasets/d6c55385a0e749519f238b77135eafac/explore?location=34.269713%2C-117.262418%2C8.80&showTable=true 
 
-Filtering for Los Angeles County 
+###### Filtering for Los Angeles County 
 ```{r}
 los_angeles <- ejscreen |> 
   filter(cnty_name == "Los Angeles County")
 ```
 
-Filtering for Eagle Rock and Highland Park
-```{r}
-la_zip <- la_zip |> 
-  filter(zip == 90041 | zip == 90042 | zip == 90065 | zip == 90026)
-  
-```
-
-Filtering for Eagle Rock, Highland Park, Mount Washington, and Glasell Park 
+###### Filtering for Eagle Rock, Highland Park, Mount Washington, and Glasell Park 
 ```{r}
 la_neighborhood <- la_neighborhood |> 
-  filter(name == "Eagle Rock" | name == "Highland Park" | name == "Mount Washington" | name == "Glassell Park" )
+  filter(name == "Eagle Rock" | name == "Highland Park" | name == "Mount Washington" | name == "Glassell Park" | name == "Cypress Park"| name == "Montecito Heights"| name == "Atwater Village"| name == "Lincoln Heights"| name == "El Sereno"  )
 ```
 
 
+## Map of People of Color Percentage for NorthEast Los Angeles 
+### Eagle Rock, Highland Park, Mount Washington, and Glassell Park
 ```{r}
-tm_shape(la_neighborhood)+
-  tm_polygons() +
 tm_shape(los_angeles)+
-  tm_polygons(fill = "lifeexppct",
-              fill.scale = tm_scale(values = "brewer.YlOrBr")) 
-  
-  
+  tm_polygons(fill = "peopcolorpct",
+              fill.scale = tm_scale(values = "brewer.YlOrBr"),
+              fill.legend = tm_legend(title = "Percentile People of Color")) +
+tm_shape(la_neighborhood, is.main = TRUE) +
+  tm_borders() +
+  tm_text("name",
+          shadow = TRUE, 
+          bgcol = "white") +
+  tm_title(text = "NorthEast Los Angeles: Percent People of Color",
+           frame = TRUE)+
+  tm_compass(position = c("right", "top"), frame = TRUE)+
+  tm_scale_bar(position = c("left", "bottom"),
+               bg = TRUE,
+               bg.col = "white")
 ```
-
+## Map of Air toxics cancer risk, an Environmental Justice (EJ) Index for NorthEast Los Angeles 
+### Eagle Rock, Highland Park, Mount Washington, and Glassell Park
 ```{r}
-tm_shape(la_neighborhood)+
-  tm_polygons() +
 tm_shape(los_angeles)+
-  tm_polygons(fill = "pre1960pct",
-              fill.scale = tm_scale(values = "brewer.YlOrBr")) 
+  tm_polygons(fill = "d2_cancer",
+              fill.scale = tm_scale(values = "brewer.YlOrBr"),
+              fill.legend = tm_legend(title = "Air Toxins Cancer Risk EJ Index Percentile")) +
+tm_shape(la_neighborhood, is.main = TRUE) +
+  tm_borders() +
+  tm_text("name", 
+          shadow = TRUE, 
+          bgcol = "white") +
+  tm_title(text = "NorthEast Los Angeles: Air Toxins Cancer Risk EJ Index",
+           frame = TRUE)+
+  tm_compass(position = c("right", "top"), frame = TRUE) +
+  tm_scale_bar(position = c("left", "bottom"),
+               bg = TRUE,
+               bg.col = "white")
 ```
 
-```{r}
-# filter to a state you are interested in
-california <- ejscreen |> 
-  dplyr::filter(ST_ABBREV == "CA") 
-
-# filter to a county you are interested in
-santa_barbara <- ejscreen |> 
-  dplyr::filter(CNTY_NAME %in% c("Santa Barbara County"))
-
-# find the average values for all variables within counties
-california_counties <- aggregate(california, by = list(california$CNTY_NAME), FUN = mean)
-```
-
+# Analysis
+The first graph above shows people of color percentage for each block. The opacity of the orange darkens as the percentage of people of color increases. The second graph shows air toxins cancer risk environmental justice index. The air toxins cancer risk environmental justice index is based on the estimated risk of inhaling carcinogens in the air. There is an obvious correlation showing that the more people of color live in an area, the more likely they are to have a high score for air toxins cancer risk environmental justice risk index. 
