@@ -16,6 +16,9 @@ ejscreen <- sf::st_read(here::here("data", "ejscreen","EJSCREEN_2023_BG_StatePct
  
 # Read in Los Angeles zip code data
 la_zip <- sf::st_read(here::here("Zip_Codes_(LA_County)", "Zip_Codes_(LA_County).shp"))
+
+# Read in Los Angeles neighnorhood shape file
+la_neighborhood <- sf::st_read(here::here("LA_Times_Neighborhood_Boundaries-shp", "8494cd42-db48-4af1-a215-a2c8f61e96a22020328-1-621do0.x5yiu.shp"))
 ```
 Changing column names to lower_snake
 ```{r}
@@ -25,6 +28,8 @@ la_zip <- janitor::clean_names(la_zip)
 ```
 I'm interested in looking at cancer rates and how they correlate to the percentage of low income individuals in NorthEast Los Angeles. To concentrate the map shape on the desired location, I downloaded a LA County zip code shape file. Link https://geohub.lacity.org/datasets/lahub::zip-codes-la-county/about 
 
+I uploaded Los Angeles neighborhoods from 
+https://geohub.lacity.org/datasets/d6c55385a0e749519f238b77135eafac/explore?location=34.269713%2C-117.262418%2C8.80&showTable=true 
 
 Filtering for Los Angeles County 
 ```{r}
@@ -39,9 +44,15 @@ la_zip <- la_zip |>
   
 ```
 
+Filtering for Eagle Rock, Highland Park, Mount Washington, and Glasell Park 
+```{r}
+la_neighborhood <- la_neighborhood |> 
+  filter(name == "Eagle Rock" | name == "Highland Park" | name == "Mount Washington" | name == "Glassell Park" )
+```
+
 
 ```{r}
-tm_shape(la_zip)+
+tm_shape(la_neighborhood)+
   tm_polygons() +
 tm_shape(los_angeles)+
   tm_polygons(fill = "lifeexppct",
@@ -51,10 +62,10 @@ tm_shape(los_angeles)+
 ```
 
 ```{r}
-tm_shape(la_zip)+
+tm_shape(la_neighborhood)+
   tm_polygons() +
 tm_shape(los_angeles)+
-  tm_polygons(fill = "ozone",
+  tm_polygons(fill = "pre1960pct",
               fill.scale = tm_scale(values = "brewer.YlOrBr")) 
 ```
 
