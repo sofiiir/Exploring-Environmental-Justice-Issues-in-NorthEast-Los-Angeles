@@ -6,9 +6,9 @@ Two maps were constructed to analyze an Environmental Justice issue in NELA. The
 
 ## Repository Contents
 
-- **Data:** [
-- **Quarto Document:** [EDS 220 - Working with Environmental Datasets](https://bren.ucsb.edu/courses/eds-220)
-- **Final Maps:** Fall 2025
+- **Los Angeles Neighborhood Boundaries:** [Shapefile](https://github.com/sofiiir/eds223-hw1/tree/main/LA_Times_Neighborhood_Boundaries-shp)
+- **Quarto Document:** [Map making quarto document](https://github.com/sofiiir/eds223-hw1/blob/main/hw1-eje.qmd)
+- **Final Maps:** [Maps](https://github.com/sofiiir/eds223-hw1/tree/main/maps)
 
 
 References:
