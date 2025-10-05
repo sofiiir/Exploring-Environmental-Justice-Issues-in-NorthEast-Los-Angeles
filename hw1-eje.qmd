@@ -10,14 +10,14 @@ This quarto document explores environmental justice issues in NorthEast Los Ange
 
 Matsuoka, Martha & Urquiza, John. (2021). Building community knowledge, resilience and resistance through research. GeoJournal. 87. 10.1007/s10708-021-10422-5. 
 
-##### Adding the necessary libraries:
+#### Adding the necessary libraries:
 ```{r}
 library(tidyverse)
 library(sf)
 library(here)
 library(tmap)
 ```
-##### Reading in the data:
+## Import data
 ```{r}
 # Read in geodatabase of EJScreen data at the Census Block Group level
 ejscreen <- sf::st_read(here::here("data", "ejscreen","EJSCREEN_2023_BG_StatePct_with_AS_CNMI_GU_VI.gdb")) 
@@ -25,6 +25,7 @@ ejscreen <- sf::st_read(here::here("data", "ejscreen","EJSCREEN_2023_BG_StatePct
 # Read in Los Angeles neighnorhood shape file
 la_neighborhood <- sf::st_read(here::here("LA_Times_Neighborhood_Boundaries-shp", "8494cd42-db48-4af1-a215-a2c8f61e96a22020328-1-621do0.x5yiu.shp"))
 ```
+## Subset Data
 ###### Changing column names to lower_snake
 ```{r}
 ejscreen <- janitor::clean_names(ejscreen)
@@ -34,20 +35,20 @@ I'm interested in looking at cancer rates and how they correlate to the percenta
 I used a Los Angeles neighborhoods shape file to select for the region that from 
 https://geohub.lacity.org/datasets/d6c55385a0e749519f238b77135eafac/explore?location=34.269713%2C-117.262418%2C8.80&showTable=true 
 
-###### Filtering for Los Angeles County 
+##### Filter for Los Angeles County 
 ```{r}
 los_angeles <- ejscreen |> 
   filter(cnty_name == "Los Angeles County")
 ```
 
-###### Filtering for NELA neighborhoods
+#### Filter for NELA neighborhoods
 ```{r}
 la_neighborhood <- la_neighborhood |> 
   filter(name == "Eagle Rock" | name == "Highland Park" | name == "Mount Washington" | name == "Glassell Park" | name == "Cypress Park"| name == "Montecito Heights"| name == "Atwater Village"| name == "Lincoln Heights"| name == "El Sereno"  )
 ```
 
-
-## Map of People of Color Percentage for NorthEast Los Angeles 
+# Visualize Data
+### Map: People of Color Percentage in NorthEast Los Angeles 
 ```{r}
  poc_percentiles <- tm_shape(los_angeles)+
   tm_polygons(fill = "peopcolorpct", 
@@ -77,7 +78,7 @@ tmap_save(poc_percentiles,
 # Show map in the quarto doc 
 print(poc_percentiles)
 ```
-## Map of Air toxics cancer risk, an Environmental Justice (EJ) Index for NorthEast Los Angeles 
+### Map: Air toxics cancer risk, an Environmental Justice (EJ) Index in NorthEast Los Angeles 
 ```{r}
 air_cancer_risk <- tm_shape(los_angeles)+
   tm_polygons(fill = "d2_cancer",
@@ -108,5 +109,10 @@ tmap_save(air_cancer_risk,
 print(air_cancer_risk)
 ```
 
-# Analysis
+# Map Interpretation
 The first graph above shows people of color percentage for each block. The opacity of the orange darkens as the percentage of people of color increases. The second graph shows air toxins cancer risk environmental justice index. The air toxins cancer risk environmental justice index is based on the estimated risk of inhaling carcinogens in the air. There is an obvious correlation showing that the more people of color live in an area, the more likely they are to have a high score for air toxins cancer risk environmental justice risk index. 
+
+# References
+
+
+Matsuoka, Martha & Urquiza, John. (2021). Building community knowledge, resilience and resistance through research. GeoJournal. 87. 10.1007/s10708-021-10422-5.
