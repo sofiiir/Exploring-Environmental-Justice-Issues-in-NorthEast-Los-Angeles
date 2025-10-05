@@ -49,39 +49,63 @@ la_neighborhood <- la_neighborhood |>
 
 ## Map of People of Color Percentage for NorthEast Los Angeles 
 ```{r}
-tm_shape(los_angeles)+
-  tm_polygons(fill = "peopcolorpct",
+ poc_percentiles <- tm_shape(los_angeles)+
+  tm_polygons(fill = "peopcolorpct", 
               fill.scale = tm_scale(values = "brewer.YlOrBr"),
               fill.legend = tm_legend(title = "Percentile People of Color")) +
-tm_shape(la_neighborhood, is.main = TRUE) +
-  tm_borders() +
-  tm_text("name",
+tm_shape(la_neighborhood, is.main = TRUE) + # is.main to set the size of map
+  tm_borders() + # Use tm_borders so the layer under is visible
+  tm_text("name", # Name helps distinguish what part of LA we're looking at
           shadow = TRUE, 
           bgcol = "white") +
-  tm_title(text = "NorthEast Los Angeles: Percent People of Color",
+  tm_title(text = "NorthEast Los Angeles: People of Color Percentiles",
            frame = TRUE)+
-  tm_compass(position = c("right", "top"), frame = TRUE)+
+  tm_compass(position = c("right", "top"), 
+             bg = TRUE,
+             bg.color = "white",
+             frame = TRUE)+
   tm_scale_bar(position = c("left", "bottom"),
                bg = TRUE,
-               bg.col = "white")
+               bg.col = "white") 
+
+# Save map and define the size
+tmap_save(poc_percentiles, 
+          here::here("maps", "poc_percentiles.png"), 
+          height = 8, 
+          width = 14)
+
+# Show map in the quarto doc 
+print(poc_percentiles)
 ```
 ## Map of Air toxics cancer risk, an Environmental Justice (EJ) Index for NorthEast Los Angeles 
 ```{r}
-tm_shape(los_angeles)+
+air_cancer_risk <- tm_shape(los_angeles)+
   tm_polygons(fill = "d2_cancer",
               fill.scale = tm_scale(values = "brewer.YlOrBr"),
               fill.legend = tm_legend(title = "Air Toxins Cancer Risk EJ Index Percentile")) +
-tm_shape(la_neighborhood, is.main = TRUE) +
-  tm_borders() +
-  tm_text("name", 
+tm_shape(la_neighborhood, is.main = TRUE) + #is.main to set the size of the map
+  tm_borders() + # Use tm_borders so the layer under is visible
+  tm_text("name", # Name helps distinguish what part of LA we're looking at
           shadow = TRUE, 
           bgcol = "white") +
   tm_title(text = "NorthEast Los Angeles: Air Toxins Cancer Risk EJ Index",
            frame = TRUE)+
-  tm_compass(position = c("right", "top"), frame = TRUE) +
+  tm_compass(position = c("right", "top"), 
+             bg = TRUE,
+             bg.color = "white",
+             frame = TRUE) +
   tm_scale_bar(position = c("left", "bottom"),
                bg = TRUE,
                bg.col = "white")
+
+# Save map and define the size
+tmap_save(air_cancer_risk, 
+          here::here("maps", "air_cancer_risk.png"), 
+          height = 8, 
+          width = 14)
+
+# Show map in the quarto doc 
+print(air_cancer_risk)
 ```
 
 # Analysis
