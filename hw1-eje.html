@@ -114,8 +114,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>This quarto document explores environmental justice issues in NorthEast Los Angeles (NELA), specifically Eagle Rock, Highland Park, Glassell Park, Cypress Park, Atwater Village, Montecito Heights, Lincoln Heights, El Sereno, and Mount Washington. There is some dispute about the official Los Anegeles neighborhoods that make up NELA so Matsuoka &amp; Urquiza’s NELA definition was utilized for this analysis. NELA is ethnically diverse making it an interesting sector to analyze.</p>
-<p>Matsuoka, Martha &amp; Urquiza, John. (2021). Building community knowledge, resilience and resistance through research. GeoJournal. 87. 10.1007/s10708-021-10422-5.</p>
+<p>This quarto document explores environmental justice issues in NorthEast Los Angeles (NELA), specifically Eagle Rock, Highland Park, Glassell Park, Cypress Park, Atwater Village, Montecito Heights, Lincoln Heights, El Sereno, and Mount Washington. There is some dispute about the official Los Anegeles neighborhoods that make up NELA so <a href="https://www.researchgate.net/publication/351828642_Building_community_knowledge_resilience_and_resistance_through_research">Matsuoka &amp; Urquiza’s</a> NELA definition was utilized for this analysis(2021). NELA is an interesting case study as it is ethnically diverse and can act as a representation for what may be occuring across the United States.</p>
 <section id="adding-the-necessary-libraries" class="level4">
 <h4 class="anchored" data-anchor-id="adding-the-necessary-libraries">Adding the necessary libraries:</h4>
 <div class="cell">
@@ -179,11 +178,9 @@ Projected CRS: NAD83 / California zone 5 (ftUS)</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>ejscreen <span class="ot">&lt;-</span> janitor<span class="sc">::</span><span class="fu">clean_names</span>(ejscreen)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>I’m interested in looking at cancer rates and how they correlate to the percentage of low income individuals in NorthEast Los Angeles.</p>
-<p>I used a Los Angeles neighborhoods shape file to select for the region that from https://geohub.lacity.org/datasets/d6c55385a0e749519f238b77135eafac/explore?location=34.269713%2C-117.262418%2C8.80&amp;showTable=true</p>
 </section>
-<section id="filter-for-los-angeles-county" class="level5">
-<h5 class="anchored" data-anchor-id="filter-for-los-angeles-county">Filter for Los Angeles County</h5>
+<section id="filter-for-los-angeles-county" class="level4">
+<h4 class="anchored" data-anchor-id="filter-for-los-angeles-county">Filter for Los Angeles County</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>los_angeles <span class="ot">&lt;-</span> ejscreen <span class="sc">|&gt;</span> </span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(cnty_name <span class="sc">==</span> <span class="st">"Los Angeles County"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -334,11 +331,16 @@ fit well, and are therefore rescaled.
 </section>
 <section id="map-interpretation" class="level1">
 <h1>Map Interpretation</h1>
-<p>The first graph above shows people of color percentage for each block. The opacity of the orange darkens as the percentage of people of color increases. The second graph shows air toxins cancer risk environmental justice index. The air toxins cancer risk environmental justice index is based on the estimated risk of inhaling carcinogens in the air. There is an obvious correlation showing that the more people of color live in an area, the more likely they are to have a high score for air toxins cancer risk environmental justice risk index.</p>
+<p>The first graph above shows people of color percentage for each Census block. The opacity of the orange darkens as the percentage of people of color increases. The second graph shows air toxics cancer risk environmental justice index. The air toxics cancer risk environmental justice index is based on the estimated risk of inhaling carcinogens in the air. There is an obvious correlation showing that the more people of color live in an area, the more likely they are to have a high score for air toxics cancer risk environmental justice risk index.</p>
+<p>Though disheartening, the finding that people of color live where environmental pollution risks to health are higher is the first step to making policy change that can help offset injust risks. Air toxics is one of the few environmental justice indices. Further analysis of the distribution of risk ranging from toxic wastewater discharge to lead paint in homes can help show accumulated environmental risk of people of color and show the immediate need for intervention to reduce negative outcomes for marginalized communities.</p>
 </section>
 <section id="references" class="level1">
 <h1>References</h1>
-<p>Matsuoka, Martha &amp; Urquiza, John. (2021). Building community knowledge, resilience and resistance through research. GeoJournal. 87. 10.1007/s10708-021-10422-5.</p>
+<ul>
+<li>LA Times. (2016). LA Times Neighborhood Boundaries. Retrieved from <a href="https://geohub.lacity.org/datasets/d6c55385a0e749519f238b77135eafac_0/about">URL</a></li>
+<li><a href="https://www.researchgate.net/publication/351828642_Building_community_knowledge_resilience_and_resistance_through_research">Matsuoka, Martha &amp; Urquiza, John. (2021). Building community knowledge, resilience and resistance through research. GeoJournal. 87. 10.1007/s10708-021-10422-5.</a></li>
+<li><a href="https://drive.google.com/file/d/1nG6Nj1bXfzQFOVMO8Km3eNy4SWu1YcIQ/view">U.S. Environmental Protection Agency (EPA), 2023. EJScreen Technical Documentation.</a></li>
+</ul>
 </section>
 
 </main>
