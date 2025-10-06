@@ -11,7 +11,7 @@ Two maps were constructed to analyze an Environmental Justice issue in NELA. The
 - **Final Maps:** [Maps](https://github.com/sofiiir/eds223-hw1/tree/main/maps)
 
 
-References:
+### References:
 
 - LA Times. (2016). LA Times Neighborhood Boundaries. Retrieved from [URL](https://geohub.lacity.org/datasets/d6c55385a0e749519f238b77135eafac_0/about)
 - [Matsuoka, Martha & Urquiza, John. (2021). Building community knowledge, resilience and resistance through research. GeoJournal. 87. 10.1007/s10708-021-10422-5.](https://www.researchgate.net/publication/351828642_Building_community_knowledge_resilience_and_resistance_through_research)
