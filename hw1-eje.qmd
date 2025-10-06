@@ -6,7 +6,7 @@ format: html
 ---
 
 ## Introduction
-This quarto document explores environmental justice issues in NorthEast Los Angeles (NELA), specifically Eagle Rock, Highland Park, Glassell Park, Cypress Park, Atwater Village, Montecito Heights, Lincoln Heights, El Sereno, and Mount Washington. There is some dispute about the official Los Anegeles neighborhoods that make up NELA so [Matsuoka & Urquiza's](https://www.researchgate.net/publication/351828642_Building_community_knowledge_resilience_and_resistance_through_research) NELA definition was utilized for this analysis(2021). NELA is an interesting case study as it is ethnically diverse and can act as a representation for what may be occuring across the United States. 
+This quarto document explores environmental justice issues in NorthEast Los Angeles (NELA), specifically Eagle Rock, Highland Park, Glassell Park, Cypress Park, Atwater Village, Montecito Heights, Lincoln Heights, El Sereno, and Mount Washington. There is some dispute about the official Los Anegeles' neighborhoods that make up NELA so [Matsuoka & Urquiza's](https://www.researchgate.net/publication/351828642_Building_community_knowledge_resilience_and_resistance_through_research) NELA definition was utilized for this analysis(2021). NELA is an interesting case study to analyze as it is ethnically diverse and can act as a representation for what may be occuring across the United States. 
 
  
 
@@ -54,16 +54,24 @@ la_neighborhood <- la_neighborhood |>
            name == "El Sereno"  )
 ```
 
+## Data Manipulation 
+#### Changing the measure from 0-1 to 0-100
+```{r}
+los_angeles <- los_angeles |> 
+  mutate(poc_ile = (peopcolorpct * 100))
+```
+
+
 # Visualize Data
-### Map: People of Color Percentage in NorthEast Los Angeles 
+### Map: People of Color Percentile in NorthEast Los Angeles 
 ```{r}
  poc_percentiles <- tm_shape(los_angeles)+
-  tm_polygons(fill = "peopcolorpct", 
+  tm_polygons(fill = "poc_ile", 
               fill.scale = tm_scale(values = "brewer.YlOrBr"),
-              fill.legend = tm_legend(title = "Percentile People of Color")) +
+              fill.legend = tm_legend(title = "People of Color Percentile")) +
 tm_shape(la_neighborhood, is.main = TRUE) + # is.main to set the size of map
   tm_borders() + # Use tm_borders so the layer under is visible
-  tm_text("name", # Name helps distinguish what part of LA we're looking at
+  tm_text("name", # Name helps distinguish what part of LA is being mapped
           shadow = TRUE, 
           bgcol = "white") +
   tm_title(text = "NorthEast Los Angeles: People of Color Percentiles",
@@ -85,7 +93,7 @@ tmap_save(poc_percentiles,
 # Show map in the quarto doc 
 print(poc_percentiles)
 ```
-### Map: Air toxics cancer risk, an Environmental Justice (EJ) Index in NorthEast Los Angeles 
+### Map: Air Toxics Cancer Risk Percentile, an Environmental Justice (EJ) Index in NorthEast Los Angeles 
 ```{r}
 air_cancer_risk <- tm_shape(los_angeles)+
   tm_polygons(fill = "d2_cancer",
@@ -93,7 +101,7 @@ air_cancer_risk <- tm_shape(los_angeles)+
               fill.legend = tm_legend(title = "Air Toxins Cancer Risk EJ Index Percentile")) +
 tm_shape(la_neighborhood, is.main = TRUE) + #is.main to set the size of the map
   tm_borders() + # Use tm_borders so the layer under is visible
-  tm_text("name", # Name helps distinguish what part of LA we're looking at
+  tm_text("name", # Name helps distinguish what part of LA is being mapped
           shadow = TRUE, 
           bgcol = "white") +
   tm_title(text = "NorthEast Los Angeles: Air Toxins Cancer Risk EJ Index",
@@ -117,9 +125,9 @@ print(air_cancer_risk)
 ```
 
 # Map Interpretation
-The first graph above shows people of color percentage for each Census block. The opacity of the orange darkens as the percentage of people of color increases. The second graph shows air toxics cancer risk environmental justice index. The air toxics cancer risk environmental justice index is based on the estimated risk of inhaling carcinogens in the air. There is an obvious correlation showing that the more people of color live in an area, the more likely they are to have a high score for air toxics cancer risk environmental justice risk index. 
+The first graph above shows people of color percentile for each Census block. The opacity of the orange darkens as the percentile of people of color increases. The second graph shows percentile of air toxics cancer risk environmental justice index. The air toxics cancer risk environmental justice index is based on the estimated risk of inhaling carcinogens in the ambient air. There is an obvious correlation showing that the higher the percentile of people of color live in an area, the more likely they are to have a high percentile for air toxics cancer risk environmental justice index. 
 
-Though disheartening, the finding that people of color live where environmental pollution risks to health are higher is the first step to making policy change that can help offset injust risks. Air toxics is one of the few environmental justice indices. Further analysis of the distribution of risk ranging from toxic wastewater discharge to lead paint in homes can help show accumulated environmental risk of people of color and show the immediate need for intervention to reduce negative outcomes for marginalized communities. 
+Though disheartening, the finding that people of color live where environmental pollution health risks are greater, knowledge of the issue is the first step to making policy change that can help offset injust  risks. Air toxics is one of the many environmental justice indices. Further analysis of the distribution of risk ranging from toxic wastewater discharge to lead paint in homes can help show accumulated environmental risk for people of color and show the immediate need for intervention to reduce negative outcomes for marginalized communities. 
 
 # References
 
