@@ -20,10 +20,13 @@ library(tmap)
 ## Import data
 ```{r}
 # Read in geodatabase of EJScreen data at the Census Block Group level
-ejscreen <- sf::st_read(here::here("data", "ejscreen","EJSCREEN_2023_BG_StatePct_with_AS_CNMI_GU_VI.gdb")) 
+ejscreen <- sf::st_read(here::here("data",
+                                   "ejscreen",
+                                   "EJSCREEN_2023_BG_StatePct_with_AS_CNMI_GU_VI.gdb")) 
  
 # Read in Los Angeles neighnorhood shape file
-la_neighborhood <- sf::st_read(here::here("LA_Times_Neighborhood_Boundaries-shp", "8494cd42-db48-4af1-a215-a2c8f61e96a22020328-1-621do0.x5yiu.shp"))
+la_neighborhood <- sf::st_read(here::here("LA_Times_Neighborhood_Boundaries-shp", 
+                                          "8494cd42-db48-4af1-a215-a2c8f61e96a22020328-1-621do0.x5yiu.shp"))
 ```
 ## Subset Data
 ###### Changing column names to lower_snake
@@ -40,7 +43,15 @@ los_angeles <- ejscreen |>
 #### Filter for NELA neighborhoods
 ```{r}
 la_neighborhood <- la_neighborhood |> 
-  filter(name == "Eagle Rock" | name == "Highland Park" | name == "Mount Washington" | name == "Glassell Park" | name == "Cypress Park"| name == "Montecito Heights"| name == "Atwater Village"| name == "Lincoln Heights"| name == "El Sereno"  )
+  filter(name == "Eagle Rock" |
+           name == "Highland Park" |
+           name == "Mount Washington" | 
+           name == "Glassell Park" | 
+           name == "Cypress Park"| 
+           name == "Montecito Heights"| 
+           name == "Atwater Village"| 
+           name == "Lincoln Heights"| 
+           name == "El Sereno"  )
 ```
 
 # Visualize Data
@@ -67,7 +78,7 @@ tm_shape(la_neighborhood, is.main = TRUE) + # is.main to set the size of map
 
 # Save map and define the size
 tmap_save(poc_percentiles, 
-          here::here("maps", "poc_percentiles.png"), 
+          here::here("maps", "poc_percentiles.png"),
           height = 8, 
           width = 14)
 
