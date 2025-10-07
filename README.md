@@ -1,4 +1,4 @@
-# EDS223: HW 1 Map Making: Exploring Environmental Justice Issues in NorthEast Los Angeles (NELA) 
+# EDS223 HW 1 Map Making: Exploring Environmental Justice Issues in NorthEast Los Angeles (NELA) 
 #### Author: Sofia Rodas
 This repository explores environmental justice issues through mapping socioeconomic factors and correlating them with potentially negative environmental exposures. NorthEast Los Angeles (NELA) is an interesting case study as it is ethnically diverse and can act as a representation for what may be occuring across the United States. For the purposes of this data exploration NELA is characterized as including Eagle Rock, Highland Park, Glassell Park, Cypress Park, Atwater Village, Montecito Heights, Lincoln Heights, El Sereno, and Mount Washington (Matsuoka & Urquiza, 2021). 
 
