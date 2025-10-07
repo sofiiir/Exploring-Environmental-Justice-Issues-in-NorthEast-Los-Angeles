@@ -2,7 +2,7 @@
 title: "Environmental Justice Data Exploration"
 author: "Sofia Rodas"
 date: October 6, 2025
-format: html
+format: docx
 ---
 
 ## Introduction
@@ -98,13 +98,13 @@ print(poc_percentiles)
 air_cancer_risk <- tm_shape(los_angeles)+
   tm_polygons(fill = "d2_cancer",
               fill.scale = tm_scale(values = "brewer.YlOrBr"),
-              fill.legend = tm_legend(title = "Air Toxins Cancer Risk EJ Index Percentile")) +
+              fill.legend = tm_legend(title = "Air Toxics Cancer Risk EJ Index Percentile")) +
 tm_shape(la_neighborhood, is.main = TRUE) + #is.main to set the size of the map
   tm_borders() + # Use tm_borders so the layer under is visible
   tm_text("name", # Name helps distinguish what part of LA is being mapped
           shadow = TRUE, 
           bgcol = "white") +
-  tm_title(text = "NorthEast Los Angeles: Air Toxins Cancer Risk EJ Index Percentiles",
+  tm_title(text = "NorthEast Los Angeles: Air Toxics Cancer Risk EJ Index Percentiles",
            frame = TRUE)+
   tm_compass(position = c("right", "top"), 
              bg = TRUE,
