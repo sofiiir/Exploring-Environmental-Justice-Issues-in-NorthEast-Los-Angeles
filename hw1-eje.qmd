@@ -3,6 +3,8 @@ title: "Environmental Justice Data Exploration"
 author: "Sofia Rodas"
 date: October 6, 2025
 format: docx
+message: false
+warning: false
 ---
 
 ## Introduction
