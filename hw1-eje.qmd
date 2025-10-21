@@ -2,7 +2,7 @@
 title: "Environmental Justice Data Exploration"
 author: "Sofia Rodas"
 date: October 6, 2025
-format: docx
+format: html
 message: false
 warning: false
 ---
@@ -14,6 +14,8 @@ This quarto document explores environmental justice issues in NorthEast Los Ange
 
 #### Adding the necessary libraries:
 ```{r}
+#| output: false
+
 library(tidyverse)
 library(sf)
 library(here)
@@ -21,6 +23,8 @@ library(tmap)
 ```
 ## Import data
 ```{r}
+#| output: false
+
 # Read in geodatabase of EJScreen data at the Census Block Group level
 ejscreen <- sf::st_read(here::here("data",
                                    "ejscreen",
