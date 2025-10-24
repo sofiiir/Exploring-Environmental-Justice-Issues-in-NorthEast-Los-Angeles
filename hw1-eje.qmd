@@ -81,7 +81,7 @@ st_crs(la_neighborhood)
 st_crs(los_angeles)
 ```
 
-The CRS do not match for the two dataframes. Change the CRS to the CRS of the environmental justice data since this is the data provided for the assignment.
+The CRS do not match for the two dataframes. Change the CRS of the la_neighborhood to the CRS of the environmental justice data since WGS 84 Pseudo-Mercator presents accurate representations of 2-D maps. 
 ```{r}
 # Set the CRS to that of the environmental justice data
 la_neighborhood <- st_transform(la_neighborhood, crs = st_crs(los_angeles))
