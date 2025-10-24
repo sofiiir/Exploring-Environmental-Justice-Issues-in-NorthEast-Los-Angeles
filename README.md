@@ -5,6 +5,8 @@ This repository explores environmental justice issues through mapping socioecono
 Two maps were constructed to analyze an Environmental Justice issue in NELA. The first map shows the percentile of people of color in each NELA community. The second map shows the percentile of air toxics cancer risk, an Environmental Justice index that shows an estimate of lifetime exposure to carcinogens from the ambient air. There is a correlation between areas where a greater proportion of people of color reside and higher percentile of air toxics cancer risk environmental justice index.
 
 ## Repository Contents
+![Uploading hw1-workflow.png…]()
+
 
 - **Los Angeles Neighborhood Boundaries:** [Shapefile](https://github.com/sofiiir/eds223-hw1/tree/main/LA_Times_Neighborhood_Boundaries-shp)
 - **Quarto Document:** [Map making quarto document](https://github.com/sofiiir/eds223-hw1/blob/main/hw1-eje.qmd)
