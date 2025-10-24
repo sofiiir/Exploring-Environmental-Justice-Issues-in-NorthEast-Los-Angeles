@@ -1,7 +1,7 @@
 ---
 title: "Environmental Justice Data Exploration"
 author: "Sofia Rodas"
-date: October 6, 2025
+date: October 23, 2025
 format: html
 message: false
 warning: false
@@ -93,7 +93,7 @@ la_neighborhood <- st_transform(la_neighborhood, crs = st_crs(los_angeles))
 if (st_crs(los_angeles)==st_crs(la_neighborhood)){
   print("it's a match!")
 }else {
-    print("still not a match")
+   warning("still not a match")
 }
 ```
 
