@@ -190,7 +190,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_crs</span>(los_angeles)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>The CRS do not match for the two dataframes. Change the CRS to the CRS of the environmental justice data since this is the data provided for the assignment.</p>
+<p>The CRS do not match for the two dataframes. Change the CRS of the la_neighborhood to the CRS of the environmental justice data since WGS 84 Pseudo-Mercator presents accurate representations of 2-D maps.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the CRS to that of the environmental justice data</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>la_neighborhood <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(la_neighborhood, <span class="at">crs =</span> <span class="fu">st_crs</span>(los_angeles))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
