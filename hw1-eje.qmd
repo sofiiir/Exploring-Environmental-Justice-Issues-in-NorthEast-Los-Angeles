@@ -1,8 +1,8 @@
 ---
 title: "Environmental Justice Data Exploration"
 author: "Sofia Rodas"
-date: October 23, 2025
-format: html
+date: October 24, 2025
+format: docx
 message: false
 warning: false
 ---
@@ -31,7 +31,7 @@ ejscreen <- sf::st_read(here::here("data",
                                    "EJSCREEN_2023_BG_StatePct_with_AS_CNMI_GU_VI.gdb")) 
  
 # Read in Los Angeles neighnorhood shape file
-la_neighborhood <- sf::st_read(here::here("LA_Times_Neighborhood_Boundaries-shp", 
+la_neighborhood <- sf::st_read(here::here("data","LA_Times_Neighborhood_Boundaries-shp", 
                                           "8494cd42-db48-4af1-a215-a2c8f61e96a22020328-1-621do0.x5yiu.shp"))
 ```
 ## Subset Data
